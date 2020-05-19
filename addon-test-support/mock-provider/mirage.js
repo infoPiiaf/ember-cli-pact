@@ -1,8 +1,8 @@
-import require from 'require';
 import { assert } from '@ember/debug';
 import { camelize } from '@ember/string'
 import MockProvider from 'ember-cli-pact/mock-provider';
 import { allOf, arrayElements } from 'ember-cli-pact/matchers';
+import startMirage from 'ember-cli-mirage/start-mirage';
 
 let activeProvider = null;
 
@@ -51,9 +51,7 @@ export default class MirageProvider extends MockProvider {
 
   _startServer() {
     try {
-      let { modulePrefix } = this.config;
-      let { startMirage } = require(`${modulePrefix}/initializers/ember-cli-mirage`);
-      this.server = startMirage();
+      this.server = startMirage(this.owner);
       this.server.passthrough('/_pact/*path');
     } catch (error) {
       throw new Error(`Unable to start mirage server; is ember-cli-mirage installed? ${error.message}`);

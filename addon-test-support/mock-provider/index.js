@@ -7,8 +7,9 @@ import Interaction from 'ember-cli-pact/-private/interaction';
 import { loadProviderStates, lookupProviderState } from 'ember-cli-pact/-private/provider-states';
 
 export default class MockProvider {
-  constructor(config) {
+  constructor(config, owner = null) {
     this.config = config;
+    this.owner = owner;
     this.interaction = null;
     this._uploadCallbacks = [];
     this._capturing = false;

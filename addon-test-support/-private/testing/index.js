@@ -66,7 +66,7 @@ function findOwner(context) {
 
 function setupProvider(context, options, testName) {
   let MockProvider = loadMockProvider(context, options);
-  let provider = context._pactProvider = new MockProvider(getConfig(context));
+  let provider = context._pactProvider = new MockProvider(getConfig(context), findOwner(context));
 
   assertSingleConsumerName(context, options);
 
